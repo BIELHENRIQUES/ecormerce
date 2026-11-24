@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Produto | NEXORA</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background:
+                radial-gradient(ellipse at 15% 20%, rgba(100, 0, 255, 0.22), transparent 38%),
+                radial-gradient(ellipse at 90% 80%, rgba(112, 0, 255, 0.25), transparent 40%),
+                linear-gradient(135deg, #070014, #10002c 55%, #080019);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .navbar-nexora {
+            background: rgba(7, 0, 23, 0.94);
+            border-bottom: 1px solid rgba(151, 55, 255, 0.55);
+            padding: 16px 0;
+            box-shadow: 0 5px 25px rgba(95, 0, 255, 0.12);
+        }
+
+        .navbar-brand {
+            color: #ffffff !important;
+            font-size: 29px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .navbar-brand span {
+            color: #923cff;
+        }
+
+        .navbar-nexora .nav-link {
+            color: #e4d8ff;
+            font-weight: 600;
+            transition: 0.3s;
+            margin-left: 20px;
+        }
+
+        .navbar-nexora .nav-link:hover {
+            color: #b77aff;
+        }
+
+        .produto-container {
+            max-width: 1250px;
+            padding-top: 55px;
+            padding-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .botao-voltar {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 12px 20px;
+            border: 1px solid #8b32ed;
+            border-radius: 30px;
+            color: #d9bdff;
+            text-decoration: none;
+            font-weight: 600;
+            background: rgba(88, 20, 170, 0.12);
+            transition: 0.3s;
+        }
+
+        .botao-voltar:hover {
+            background: #7421d9;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(137, 45, 255, 0.35);
+            transform: translateX(-3px);
+        }
+
+        .produto-detalhe {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            margin-top: 35px;
+            border: 1px solid rgba(155, 66, 255, 0.8);
+            border-radius: 25px;
+            overflow: hidden;
+            background: rgba(13, 3, 34, 0.86);
+            box-shadow:
+                0 0 30px rgba(112, 0, 255, 0.15),
+                0 20px 70px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(15px);
+        }
+
+        .produto-imagem-area {
+            min-height: 510px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at center, rgba(119, 34, 255, 0.35), transparent 65%),
+                linear-gradient(145deg, #180039, #080019);
+        }
+
+        .produto-imagem-area::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border: 1px solid rgba(173, 94, 255, 0.3);
+            border-radius: 50%;
+            box-shadow:
+                0 0 40px rgba(119, 34, 255, 0.2),
+                inset 0 0 40px rgba(119, 34, 255, 0.1);
+        }
+
+        .produto-imagem {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-height: 430px;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.55));
+            transition: transform 0.5s ease;
+        }
+
+        .produto-imagem:hover {
+            transform: scale(1.06);
+        }
+
+        .imagem-etiqueta {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            z-index: 2;
+            padding: 9px 16px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #9c35ff, #6712df);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 20px rgba(135, 40, 255, 0.4);
+        }
+
+        .produto-informacoes {
+            padding: 48px 42px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .produto-categoria-detalhe {
+            color: #b67aff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .produto-titulo-detalhe {
+            color: #ffffff;
+            font-size: clamp(27px, 3vw, 39px);
+            font-weight: 900;
+            line-height: 1.15;
+            margin: 16px 0;
+        }
+
+        .linha-destaque {
+            width: 65px;
+            height: 4px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #8b28ff, #d17aff);
+            margin-bottom: 22px;
+        }
+
+        .produto-descricao-detalhe {
+            color: #c3b7d9;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .produto-preco-detalhe {
+            color: #bd80ff;
+            font-size: 36px;
+            font-weight: 900;
+            margin-top: 5px;
+        }
+
+        .produto-parcela-detalhe {
+            color: #c8bddb;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .produto-entrega {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            width: fit-content;
+            margin-top: 23px;
+            padding: 11px 15px;
+            border: 1px solid rgba(67, 205, 139, 0.3);
+            border-radius: 10px;
+            background: rgba(31, 150, 91, 0.12);
+            color: #78e4ae;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .botao-comprar {
+            width: 100%;
+            margin-top: 28px;
+            padding: 17px;
+            border: 1px solid #a43cff;
+            border-radius: 15px;
+            background: linear-gradient(110deg, #8b20ff, #6100dc);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(112, 0, 255, 0.3);
+            transition: 0.3s;
+        }
+
+        .botao-comprar:hover {
+            background: linear-gradient(110deg, #a747ff, #7a18f2);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(137, 45, 255, 0.5);
+        }
+
+        .botao-comprar:active {
+            transform: scale(0.98);
+        }
+
+        .seguranca-compra {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            margin-top: 19px;
+            color: #a99cbe;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .seguranca-compra i {
+            color: #b77aff;
+            font-size: 16px;
+        }
+
+        .produto-beneficios {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .beneficio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 17px 13px;
+            border: 1px solid rgba(145, 76, 230, 0.3);
+            border-radius: 14px;
+            background: rgba(31, 11, 61, 0.7);
+        }
+
+        .beneficio-item i {
+            color: #b77aff;
+            font-size: 23px;
+        }
+
+        .beneficio-item span {
+            color: #d4c8e9;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .produto-erro {
+            padding: 65px 25px;
+            text-align: center;
+        }
+
+        .produto-erro i {
+            color: #a94aff;
+            font-size: 50px;
+        }
+
+        .produto-erro h2 {
+            color: white;
+            margin: 20px 0 10px;
+        }
+
+        .produto-erro p {
+            color: #bdb0d4;
+        }
+
+        .rodape {
+            padding: 30px 15px;
+            background: rgba(5, 0, 17, 0.95);
+            border-top: 1px solid rgba(145, 60, 255, 0.4);
+            color: #b8a9d0;
+            text-align: center;
+        }
+
+        .rodape h4 {
+            color: #a65aff;
+            font-size: 23px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .rodape p {
+            margin: 7px 0 0;
+            font-size: 13px;
+        }
+
+        @media (max-width: 991px) {
+            .produto-detalhe {
+                grid-template-columns: 1fr;
+            }
+
+            .produto-imagem-area {
+                min-height: 390px;
+            }
+
+            .produto-imagem {
+                max-height: 340px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 24px;
+            }
+
+            .navbar-nexora .nav-link {
+                margin-left: 0;
+                font-size: 13px;
+            }
+
+            .produto-container {
+                padding-top: 35px;
+                padding-bottom: 45px;
+            }
+
+            .produto-imagem-area {
+                min-height: 280px;
+                padding: 25px;
+            }
+
+            .produto-imagem {
+                max-height: 240px;
+            }
+
+            .produto-informacoes {
+                padding: 30px 23px;
+            }
+
+            .produto-titulo-detalhe {
+                font-size: 27px;
+            }
+
+            .produto-preco-detalhe {
+                font-size: 30px;
+            }
+
+            .produto-beneficios {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-nexora">
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+                NEX<span>ORA</span>
+            </a>
+
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="catalogo.html">Loja</a>
+                <a class="nav-link" href="carrinho.html">Carrinho</a>
+                <a class="nav-link" href="login.html">
+                    <i class="bi bi-person-circle"></i> Entrar
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="container produto-container">
+
+        <a href="catalogo.html" class="botao-voltar">
+            <i class="bi bi-arrow-left"></i>
+            Voltar ao catálogo
+        </a>
+
+        <div id="detalhesProduto" class="produto-detalhe">
+
+            <div class="produto-erro">
+                <p>Carregando produto...</p>
+            </div>
+
+        </div>
+
+        <div class="produto-beneficios">
+
+            <div class="beneficio-item">
+                <i class="bi bi-truck"></i>
+                <span>Entrega disponível</span>
+            </div>
+
+            <div class="beneficio-item">
+                <i class="bi bi-shield-check"></i>
+                <span>Compra demonstrativa</span>
+            </div>
+
+            <div class="beneficio-item">
+                <i class="bi bi-credit-card"></i>
+                <span>Pagamento simulado</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="rodape">
+        <h4>NEXORA</h4>
+        <p>Tecnologia que acompanha você.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        const produtos = {
+            "notebook-pro": {
+                nome: "Lenovo IdeaPad Slim 3",
+                categoria: "NOTEBOOK",
+                descricao: "Notebook para produtividade, estudos e tarefas do dia a dia. Uma opção versátil para acompanhar sua rotina.",
+                preco: 3499,
+                imagem: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+                parcela: "12x de R$ 291,58 sem juros"
+            },
+
+            "notebook-ultra": {
+                nome: "Acer Aspire 5",
+                categoria: "NOTEBOOK",
+                descricao: "Notebook versátil para estudos, trabalho e entretenimento. Ideal para diferentes atividades do cotidiano.",
+                preco: 4299,
+                imagem: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+                parcela: "12x de R$ 358,25 sem juros"
+            },
+
+            "smartphone-x": {
+                nome: "Apple iPhone 13",
+                categoria: "SMARTPHONE",
+                descricao: "Smartphone Apple com design moderno, ótimo desempenho e câmeras de qualidade.",
+                preco: 1899,
+                imagem: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+                parcela: "12x de R$ 158,25 sem juros"
+            },
+
+            "smartphone-plus": {
+                nome: "Apple iPhone 14",
+                categoria: "SMARTPHONE",
+                descricao: "Smartphone Apple com recursos modernos, câmeras avançadas e ótimo desempenho.",
+                preco: 2499,
+                imagem: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd",
+                parcela: "12x de R$ 208,25 sem juros"
+            }
+        };
+
+        const parametros = new URLSearchParams(window.location.search);
+        const idProduto = parametros.get("id");
+
+        const produto = produtos[idProduto];
+        const areaDetalhes = document.getElementById("detalhesProduto");
+
+        function formatarValor(valor) {
+            return Number(valor).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+        }
+
+        if (!produto) {
+
+            areaDetalhes.innerHTML = `
+                <div class="produto-erro">
+                    <i class="bi bi-exclamation-circle"></i>
+                    <h2>Produto não encontrado</h2>
+                    <p>Não conseguimos localizar esse produto.</p>
+                    <a href="catalogo.html" class="botao-voltar">
+                        Voltar à loja
+                    </a>
+                </div>
+            `;
+
+        } else {
+
+            areaDetalhes.innerHTML = `
+                <div class="produto-imagem-area">
+
+                    <span class="imagem-etiqueta">
+                        NEXORA STORE
+                    </span>
+
+                    <img
+                        src="${produto.imagem}"
+                        alt="${produto.nome}"
+                        class="produto-imagem"
+                    >
+
+                </div>
+
+                <div class="produto-informacoes">
+
+                    <span class="produto-categoria-detalhe">
+                        ${produto.categoria}
+                    </span>
+
+                    <h1 class="produto-titulo-detalhe">
+                        ${produto.nome}
+                    </h1>
+
+                    <div class="linha-destaque"></div>
+
+                    <p class="produto-descricao-detalhe">
+                        ${produto.descricao}
+                    </p>
+
+                    <div class="produto-preco-detalhe">
+                        ${formatarValor(produto.preco)}
+                    </div>
+
+                    <p class="produto-parcela-detalhe">
+                        ou ${produto.parcela}
+                    </p>
+
+                    <div class="produto-entrega">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Entrega disponível
+                    </div>
+
+                    <button
+                        type="button"
+                        class="botao-comprar"
+                        id="adicionarProdutoDetalhe"
+                    >
+                        <i class="bi bi-cart-plus"></i>
+                        Adicionar ao carrinho
+                    </button>
+
+                    <div class="seguranca-compra">
+                        <i class="bi bi-shield-lock"></i>
+                        Ambiente demonstrativo da NEXORA
+                    </div>
+
+                </div>
+            `;
+
+            document.getElementById("adicionarProdutoDetalhe")
+                .addEventListener("click", function () {
+
+                    if (typeof adicionarProduto === "function") {
+
+                        adicionarProduto(
+                            idProduto,
+                            produto.nome,
+                            produto.preco
+                        );
+
+                    } else {
+
+                        const chave = "nexoraCarrinho";
+
+                        let carrinho = JSON.parse(
+                            localStorage.getItem(chave) || "[]"
+                        );
+
+                        const existente = carrinho.find(
+                            item => item.id === idProduto
+                        );
+
+                        if (existente) {
+                            existente.quantidade++;
+                        } else {
+                            carrinho.push({
+                                id: idProduto,
+                                nome: produto.nome,
+                                preco: produto.preco,
+                                quantidade: 1
+                            });
+                        }
+
+                        localStorage.setItem(
+                            chave,
+                            JSON.stringify(carrinho)
+                        );
+                    }
+
+                    this.innerHTML = `
+                        <i class="bi bi-check-circle-fill"></i>
+                        Adicionado ao carrinho
+                    `;
+
+                });
+
+        }
+    </script>
+
+</body>
+</html>

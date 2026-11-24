@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | NEXORA</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #080016;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-page {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background:
+                radial-gradient(ellipse at 5% 20%, rgba(105, 0, 255, .35), transparent 28%),
+                radial-gradient(ellipse at 100% 90%, rgba(105, 0, 255, .38), transparent 30%),
+                linear-gradient(135deg, #10002b, #050014 55%, #10002b);
+        }
+
+        .login-page::before,
+        .login-page::after {
+            content: "";
+            position: absolute;
+            width: 650px;
+            height: 260px;
+            border: 2px solid rgba(145, 0, 255, .8);
+            border-radius: 50%;
+            transform: rotate(-28deg);
+            pointer-events: none;
+            filter: drop-shadow(0 0 12px #8500ff);
+        }
+
+        .login-page::before {
+            top: -130px;
+            left: -250px;
+            box-shadow:
+                0 25px 0 rgba(100, 0, 255, .15),
+                0 50px 0 rgba(100, 0, 255, .12),
+                0 75px 0 rgba(100, 0, 255, .10);
+        }
+
+        .login-page::after {
+            right: -300px;
+            bottom: -130px;
+            box-shadow:
+                0 -25px 0 rgba(100, 0, 255, .15),
+                0 -50px 0 rgba(100, 0, 255, .12),
+                0 -75px 0 rgba(100, 0, 255, .10);
+        }
+
+        .login-navbar {
+            position: relative;
+            z-index: 2;
+            min-height: 96px;
+            border-bottom: 1px solid #8300ff;
+            background: rgba(5, 0, 20, .88);
+            box-shadow: 0 2px 15px rgba(125, 0, 255, .15);
+        }
+
+        .login-brand {
+            color: #fff;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            text-decoration: none;
+        }
+
+        .login-brand span {
+            color: #8b20ff;
+        }
+
+        .login-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .login-nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 17px;
+            transition: .3s;
+        }
+
+        .login-nav-links a:hover {
+            color: #bd83ff;
+        }
+
+        .login-nav-links i {
+            color: #c17aff;
+            margin-right: 9px;
+            font-size: 19px;
+        }
+
+        .login-enter-link {
+            border: 2px solid #a000ff;
+            border-radius: 30px;
+            padding: 11px 24px;
+            color: #d4a5ff;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .login-enter-link:hover {
+            background: #7900e8;
+            color: white;
+            box-shadow: 0 0 18px #7900e8;
+        }
+
+        .login-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 630px;
+            padding: 35px 40px 30px;
+            border: 1px solid #8500ff;
+            border-radius: 28px;
+            background: rgba(9, 0, 28, .82);
+            box-shadow:
+                0 0 25px rgba(112, 0, 255, .18),
+                inset 0 0 25px rgba(112, 0, 255, .08);
+        }
+
+        .login-symbol {
+            width: 150px;
+            height: 125px;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .login-symbol::before {
+            content: "";
+            position: absolute;
+            width: 245px;
+            height: 55px;
+            border: 2px solid #9d35ff;
+            border-radius: 50%;
+            transform: rotate(-25deg);
+            box-shadow: 0 0 15px #8c00ff;
+        }
+
+        .login-symbol span {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            font-size: 112px;
+            line-height: 1;
+            font-weight: 900;
+            font-style: italic;
+            text-shadow: 0 0 12px #a000ff, 0 0 25px #7900ff;
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .login-title span {
+            color: #941cff;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: #c3bbd1;
+            font-size: 19px;
+            margin-bottom: 25px;
+        }
+
+        .login-field {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .login-field > i {
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #c28aff;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        .login-input {
+            width: 100%;
+            height: 65px;
+            padding: 12px 55px 12px 70px;
+            border: 1px solid #7900d9;
+            border-radius: 16px;
+            background: rgba(35, 5, 70, .55);
+            color: white;
+            font-size: 19px;
+            outline: none;
+            transition: .3s;
+        }
+
+        .login-input::placeholder {
+            color: #b7abc9;
+        }
+
+        .login-input:focus {
+            border-color: #b13cff;
+            box-shadow: 0 0 15px rgba(153, 0, 255, .35);
+            background: rgba(42, 5, 80, .75);
+            color: white;
+        }
+
+        .login-password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #b7abc9;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .login-password-toggle:hover {
+            color: #d7aaff;
+        }
+
+        .login-message {
+            color: #ffb5b5;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 67px;
+            border: 1px solid #a000ff;
+            border-radius: 30px;
+            background: linear-gradient(100deg, #6500e9, #a000ff);
+            color: white;
+            font-size: 23px;
+            font-weight: 700;
+            transition: .3s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(151, 0, 255, .65);
+            background: linear-gradient(100deg, #7900ff, #b52cff);
+        }
+
+        .login-button i {
+            margin-right: 12px;
+        }
+
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #ddd4e9;
+            margin: 15px 0;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: #746783;
+        }
+
+        .login-register {
+            width: 100%;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: 2px solid #a000ff;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .login-register:hover {
+            background: rgba(128, 0, 255, .2);
+            box-shadow: 0 0 15px rgba(128, 0, 255, .4);
+            color: white;
+        }
+
+        .login-forgot {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #a52aff;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .login-forgot:hover {
+            color: #d4a5ff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .login-navbar {
+                padding: 15px 0;
+            }
+
+            .login-brand {
+                font-size: 28px;
+            }
+
+            .login-nav-links {
+                gap: 15px;
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .login-nav-links a {
+                font-size: 14px;
+            }
+
+            .login-enter-link {
+                display: none;
+            }
+
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .login-title {
+                font-size: 30px;
+            }
+
+            .login-subtitle {
+                font-size: 16px;
+            }
+
+            .login-symbol span {
+                font-size: 90px;
+            }
+
+            .login-input {
+                height: 58px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <nav class="login-navbar">
+        <div class="container-fluid px-4 px-lg-5 d-flex align-items-center justify-content-between flex-wrap">
+
+            <a href="index.html" class="login-brand">
+                NEX<span>ORA</span>
+            </a>
+
+            <div class="login-nav-links">
+                <a href="index.html">
+                    <i class="bi bi-house-door-fill"></i>Início
+                </a>
+
+                <a href="catalogo.html">
+                    <i class="bi bi-bag-fill"></i>Loja
+                </a>
+
+                <a href="carrinho.html">
+                    <i class="bi bi-cart-fill"></i>Carrinho
+                </a>
+            </div>
+
+            <a href="login.html" class="login-enter-link">
+                <i class="bi bi-person-fill me-2"></i>Entrar
+            </a>
+
+        </div>
+    </nav>
+
+    <main class="login-content">
+
+        <div class="login-card">
+
+            <div class="login-symbol">
+                <span>N</span>
+            </div>
+
+            <h1 class="login-title">
+                Bem-vindo <span>de volta!</span>
+            </h1>
+
+            <p class="login-subtitle">
+                Faça login na sua conta para continuar
+            </p>
+
+            <form id="formLogin">
+
+                <div class="login-field">
+                    <i class="bi bi-envelope"></i>
+
+                    <input
+                        type="email"
+                        class="login-input"
+                        id="emailLogin"
+                        placeholder="E-mail"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="login-field">
+                    <i class="bi bi-lock-fill"></i>
+
+                    <input
+                        type="password"
+                        class="login-input"
+                        id="senhaLogin"
+                        placeholder="Senha"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="login-password-toggle"
+                        id="toggleSenha"
+                        aria-label="Mostrar senha"
+                    >
+                        <i class="bi bi-eye-slash"></i>
+                    </button>
+                </div>
+
+                <div id="mensagemLogin" class="login-message mb-3"></div>
+
+                <button type="submit" class="login-button">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Entrar
+                </button>
+
+            </form>
+
+            <div class="login-divider">
+                ou
+            </div>
+
+            <a href="cadastro.html" class="login-register">
+                <i class="bi bi-person-plus-fill"></i>
+                Criar uma conta
+            </a>
+
+            <a href="#" class="login-forgot">
+                Esqueceu sua senha?
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
+<script>
+    const toggleSenha = document.getElementById("toggleSenha");
+    const campoSenha = document.getElementById("senhaLogin");
+
+    toggleSenha.addEventListener("click", function () {
+        const senhaVisivel = campoSenha.type === "text";
+
+        campoSenha.type = senhaVisivel ? "password" : "text";
+
+        toggleSenha.innerHTML = senhaVisivel
+            ? '<i class="bi bi-eye-slash"></i>'
+            : '<i class="bi bi-eye"></i>';
+
+        toggleSenha.setAttribute(
+            "aria-label",
+            senhaVisivel ? "Mostrar senha" : "Ocultar senha"
+        );
+    });
+</script>
+
+</body>
+</html>

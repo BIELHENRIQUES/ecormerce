@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXORA | Tecnologia ao seu alcance</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+            background: #080020;
+        }
+
+        /* CABEÇALHO NEXORA */
+
+        .navbar-nexora {
+            width: 100%;
+            min-height: 82px;
+            background: linear-gradient(100deg, #080016, #13002f, #080016);
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            padding: 12px 4.2%;
+            gap: 25px;
+            border-bottom: 1px solid #8700ff;
+            box-shadow: 0 3px 18px rgba(112, 0, 255, 0.18);
+        }
+
+        .logo-nexora {
+            color: #ffffff;
+            font-size: 42px;
+            font-weight: 900;
+            text-decoration: none;
+            letter-spacing: -2px;
+            white-space: nowrap;
+            text-shadow: 0 0 15px rgba(145, 40, 255, 0.3);
+            transition: 0.3s;
+        }
+
+        .logo-nexora span {
+            color: #941cff;
+        }
+
+        .logo-nexora:hover {
+            color: #d8b5ff;
+        }
+
+        .menu-nexora {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 38px;
+            margin: 0 auto;
+        }
+
+        .menu-nexora a {
+            color: #e9e1f5;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 4px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .menu-nexora a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 3px;
+            width: 0;
+            height: 3px;
+            background: #a020ff;
+            box-shadow: 0 0 10px #9400ff;
+            transition: 0.3s;
+        }
+
+        .menu-nexora a:hover,
+        .menu-nexora a.ativo {
+            color: #c58aff;
+        }
+
+        .menu-nexora a:hover::after,
+        .menu-nexora a.ativo::after {
+            width: 100%;
+        }
+
+        .acoes-cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .icone-cabecalho {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(126, 39, 255, 0.15);
+            border: 1px solid rgba(158, 72, 255, 0.45);
+            color: #c58aff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 23px;
+            transition: 0.3s;
+        }
+
+        .icone-cabecalho:hover {
+            background: #7100db;
+            color: #ffffff;
+            border-color: #bd71ff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(143, 0, 255, 0.6);
+        }
+
+        .botao-menu-mobile {
+            display: none;
+            border: 1px solid #8d28e8;
+            background: rgba(126, 39, 255, 0.15);
+            color: #c58aff;
+            border-radius: 12px;
+            padding: 9px 13px;
+            font-size: 25px;
+        }
+
+        /* BANNER PRINCIPAL */
+
+        .banner-principal {
+            min-height: calc(100svh - 82px);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(ellipse at 78% 50%, rgba(105, 0, 255, 0.55), transparent 48%),
+                radial-gradient(ellipse at 65% 100%, rgba(91, 0, 210, 0.4), transparent 45%),
+                linear-gradient(110deg, #08001f 0%, #090027 48%, #20005c 100%);
+        }
+
+        .banner-principal::before {
+            content: "";
+            position: absolute;
+            width: 650px;
+            height: 650px;
+            right: 5%;
+            top: -350px;
+            border-radius: 50%;
+            border: 2px solid rgba(166, 70, 255, 0.35);
+            box-shadow:
+                0 0 35px rgba(140, 0, 255, 0.5),
+                0 0 90px rgba(140, 0, 255, 0.25);
+        }
+
+        .banner-conteudo {
+            width: 100%;
+            max-width: 1550px;
+            margin: 0 auto;
+            padding: 65px 5%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+        }
+
+        .texto-banner {
+            width: 49%;
+            position: relative;
+            z-index: 3;
+        }
+
+        .subtitulo-banner {
+            color: #d8c9ff;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 5px;
+            margin-bottom: 18px;
+        }
+
+        .subtitulo-banner span {
+            display: inline-block;
+            width: 42px;
+            height: 2px;
+            background: #8b35ff;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        .texto-banner h1 {
+            color: #ffffff;
+            font-size: clamp(48px, 5.5vw, 88px);
+            line-height: 0.99;
+            font-weight: 900;
+            letter-spacing: -3px;
+            margin-bottom: 22px;
+        }
+
+        .texto-banner h1 span {
+            color: #8a35ff;
+        }
+
+        .descricao-banner {
+            color: #d1cbe2;
+            font-size: clamp(17px, 1.6vw, 25px);
+            line-height: 1.4;
+            max-width: 540px;
+            margin-bottom: 35px;
+        }
+
+        .botao-catalogo {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 40px;
+            border-radius: 45px;
+            background: linear-gradient(110deg, #8c35ff, #6410e8);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: 800;
+            box-shadow: 0 8px 30px rgba(100, 16, 232, 0.35);
+            transition: 0.3s;
+        }
+
+        .botao-catalogo:hover {
+            color: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(130, 45, 255, 0.55);
+        }
+
+        .imagem-banner {
+            position: absolute;
+            width: 67%;
+            height: 100%;
+            right: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            pointer-events: none;
+        }
+
+        .imagem-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center right;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 23%);
+            mask-image: linear-gradient(to right, transparent 0%, black 23%);
+        }
+
+        /* TABLETS */
+
+        @media (max-width: 1100px) {
+            .navbar-nexora {
+                padding: 12px 3%;
+                gap: 15px;
+            }
+
+            .logo-nexora {
+                font-size: 34px;
+            }
+
+            .menu-nexora {
+                gap: 20px;
+            }
+
+            .texto-banner {
+                width: 55%;
+            }
+
+            .imagem-banner {
+                width: 65%;
+            }
+        }
+
+        /* CELULARES */
+
+        @media (max-width: 800px) {
+            .navbar-nexora {
+                min-height: 72px;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .logo-nexora {
+                font-size: 32px;
+            }
+
+            .botao-menu-mobile {
+                display: block;
+                order: 3;
+            }
+
+            .menu-nexora {
+                display: none;
+                width: 100%;
+                order: 4;
+                flex-direction: column;
+                gap: 5px;
+                padding: 12px 0;
+                margin: 0;
+            }
+
+            .menu-nexora.aberto {
+                display: flex;
+            }
+
+            .menu-nexora a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+
+            .acoes-cabecalho {
+                gap: 8px;
+            }
+
+            .icone-cabecalho {
+                width: 43px;
+                height: 43px;
+                font-size: 19px;
+            }
+
+            .banner-principal {
+                min-height: calc(100svh - 72px);
+            }
+
+            .banner-conteudo {
+                min-height: calc(100svh - 72px);
+                align-items: flex-start;
+                padding: 65px 7% 330px;
+            }
+
+            .texto-banner {
+                width: 100%;
+            }
+
+            .subtitulo-banner {
+                font-size: 12px;
+                letter-spacing: 3px;
+            }
+
+            .texto-banner h1 {
+                font-size: clamp(43px, 9vw, 65px);
+                letter-spacing: -2px;
+            }
+
+            .descricao-banner {
+                font-size: 17px;
+                max-width: 460px;
+            }
+
+            .botao-catalogo {
+                padding: 16px 28px;
+                font-size: 16px;
+            }
+
+            .imagem-banner {
+                width: 100%;
+                height: 48%;
+                top: auto;
+                bottom: 0;
+            }
+
+            .imagem-banner img {
+                -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%);
+                mask-image: linear-gradient(to bottom, transparent 0%, black 25%);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .logo-nexora {
+                font-size: 28px;
+            }
+
+            .acoes-cabecalho {
+                gap: 6px;
+            }
+
+            .icone-cabecalho {
+                width: 39px;
+                height: 39px;
+                font-size: 17px;
+            }
+
+            .banner-conteudo {
+                padding-left: 6%;
+                padding-right: 6%;
+                padding-bottom: 270px;
+            }
+
+            .texto-banner h1 {
+                font-size: 42px;
+            }
+
+            .descricao-banner {
+                font-size: 15px;
+            }
+
+            .imagem-banner {
+                height: 40%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="navbar-nexora">
+
+        <a href="index.html" class="logo-nexora">NEX<span>ORA</span></a>
+
+        <nav class="menu-nexora" id="menuNexora">
+            <a href="index.html" class="ativo">Início</a>
+            <a href="catalogo.html">Loja</a>
+        </nav>
+
+        <div class="acoes-cabecalho">
+
+            <a href="login.html" class="icone-cabecalho" aria-label="Minha conta">
+                <i class="bi bi-person"></i>
+            </a>
+
+            <a href="carrinho.html" class="icone-cabecalho" aria-label="Carrinho">
+                <i class="bi bi-bag"></i>
+            </a>
+
+        </div>
+
+        <button class="botao-menu-mobile" id="botaoMenu" aria-label="Abrir menu">
+            <i class="bi bi-list"></i>
+        </button>
+
+    </header>
+
+    <!-- BANNER PRINCIPAL -->
+    <main>
+
+        <section class="banner-principal">
+
+            <div class="banner-conteudo">
+
+                <div class="texto-banner">
+
+                    <p class="subtitulo-banner">
+                        TECNOLOGIA AO SEU ALCANCE <span></span>
+                    </p>
+
+                    <h1>
+                        Tecnologia<br>
+                        que acompanha<br>
+                        <span>você.</span>
+                    </h1>
+
+                    <p class="descricao-banner">
+                        Os melhores produtos, com qualidade,
+                        inovação e tecnologia para acompanhar
+                        todos os seus momentos.
+                    </p>
+
+                    <a href="catalogo.html" class="botao-catalogo">
+                        Ver catálogo
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="imagem-banner">
+                <img src="logo.png" alt="Notebook tecnológico da NEXORA">
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        const botaoMenu = document.getElementById("botaoMenu");
+        const menuNexora = document.getElementById("menuNexora");
+
+        botaoMenu.addEventListener("click", function () {
+            menuNexora.classList.toggle("aberto");
+
+            const icone = botaoMenu.querySelector("i");
+
+            if (menuNexora.classList.contains("aberto")) {
+                icone.classList.remove("bi-list");
+                icone.classList.add("bi-x-lg");
+            } else {
+                icone.classList.remove("bi-x-lg");
+                icone.classList.add("bi-list");
+            }
+        });
+    </script>
+
+</body>
+</html>

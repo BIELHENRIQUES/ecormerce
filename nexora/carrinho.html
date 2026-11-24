@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carrinho | NEXORA</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(ellipse at top right, rgba(117, 70, 207, 0.22), transparent 40%),
+                linear-gradient(135deg, #100625, #1c0b38 55%, #100625);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* CABEÇALHO */
+
+        .navbar-nexora {
+            background: #17092e;
+            padding: 17px 0;
+            border-bottom: 1px solid rgba(177, 139, 255, 0.2);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-nexora .navbar-brand {
+            color: #a879ff;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .navbar-nexora .navbar-brand:hover {
+            color: #c5a4ff;
+        }
+
+        .navbar-nexora .nav-link {
+            color: #d8c9f5;
+            font-weight: 600;
+            margin-left: 18px;
+            transition: 0.3s;
+        }
+
+        .navbar-nexora .nav-link:hover {
+            color: #a879ff;
+        }
+
+        /* ÁREA PRINCIPAL */
+
+        .carrinho-main {
+            padding-top: 65px;
+            padding-bottom: 90px;
+            min-height: 75vh;
+        }
+
+        .carrinho-etiqueta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 30px;
+            background: rgba(137, 91, 225, 0.18);
+            border: 1px solid rgba(177, 139, 255, 0.3);
+            color: #c4a5ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .carrinho-titulo {
+            font-size: clamp(32px, 5vw, 45px);
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .carrinho-subtitulo {
+            color: #b9a9d7;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* LISTA DE PRODUTOS */
+
+        #carrinhoProdutos {
+            width: 100%;
+        }
+
+        #carrinhoProdutos .card {
+            border: 1px solid rgba(177, 139, 255, 0.2) !important;
+            border-radius: 20px !important;
+            background: linear-gradient(135deg, #281347, #211039) !important;
+            color: #ffffff !important;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2) !important;
+            margin-bottom: 22px !important;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        #carrinhoProdutos .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(177, 139, 255, 0.55) !important;
+            box-shadow: 0 15px 35px rgba(87, 42, 160, 0.22) !important;
+        }
+
+        #carrinhoProdutos .card-body {
+            padding: 27px;
+        }
+
+        #carrinhoProdutos h5 {
+            color: #ffffff !important;
+            font-size: 19px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        #carrinhoProdutos p,
+        #carrinhoProdutos .text-muted {
+            color: #b9a9d7 !important;
+        }
+
+        #carrinhoProdutos strong {
+            color: #c5a4ff;
+        }
+
+        /* CONTROLES DE QUANTIDADE */
+
+        #carrinhoProdutos .btn-outline-secondary {
+            background: rgba(137, 91, 225, 0.12);
+            border: 1px solid #8055c8;
+            color: #d8c5ff;
+            border-radius: 9px;
+            min-width: 38px;
+            transition: 0.3s;
+        }
+
+        #carrinhoProdutos .btn-outline-secondary:hover {
+            background: #7546cf;
+            color: #ffffff;
+        }
+
+        /* REMOVER PRODUTO */
+
+        #carrinhoProdutos .btn-outline-danger {
+            background: rgba(220, 65, 115, 0.08);
+            border: 1px solid rgba(230, 100, 145, 0.5);
+            color: #ff9ab9;
+            border-radius: 9px;
+            padding: 8px 13px;
+            transition: 0.3s;
+        }
+
+        #carrinhoProdutos .btn-outline-danger:hover {
+            background: #b93667;
+            color: #ffffff;
+        }
+
+        /* RESUMO DA COMPRA */
+
+        #resumoCarrinho {
+            background: linear-gradient(145deg, #301752, #241039) !important;
+            border: 1px solid rgba(177, 139, 255, 0.3) !important;
+            border-radius: 22px !important;
+            padding: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25) !important;
+            color: #ffffff;
+        }
+
+        #resumoCarrinho .card-body {
+            padding: 28px;
+        }
+
+        #resumoCarrinho h4 {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        #resumoCarrinho span {
+            color: #c9b9e8;
+        }
+
+        #subtotalCarrinho {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        #totalCarrinho {
+            color: #b58aff !important;
+            font-weight: 900;
+        }
+
+        #resumoCarrinho hr {
+            border-color: rgba(190, 160, 255, 0.25);
+            opacity: 1;
+        }
+
+        /* BOTÕES DO RESUMO */
+
+        #resumoCarrinho .btn-primary {
+            background: linear-gradient(110deg, #914dff, #7132d4);
+            border: none;
+            border-radius: 12px;
+            padding: 14px 22px;
+            color: #ffffff;
+            font-weight: 800;
+            transition: 0.3s;
+        }
+
+        #resumoCarrinho .btn-primary:hover {
+            background: linear-gradient(110deg, #a66bff, #8145e5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(130, 65, 230, 0.35);
+        }
+
+        #resumoCarrinho .btn-outline-secondary {
+            border: 1px solid #9269d2;
+            border-radius: 12px;
+            padding: 14px 22px;
+            color: #d7c5ff;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        #resumoCarrinho .btn-outline-secondary:hover {
+            background: rgba(137, 91, 225, 0.2);
+            color: #ffffff;
+        }
+
+        #resumoCarrinho .text-muted {
+            color: #aa98cb !important;
+        }
+
+        /* CARRINHO VAZIO */
+
+        #carrinhoProdutos .alert {
+            background: linear-gradient(145deg, #281347, #211039);
+            border: 1px solid rgba(177, 139, 255, 0.3) !important;
+            border-radius: 20px;
+            padding: 40px 25px;
+            color: #d8c9f5;
+            text-align: center;
+        }
+
+        #carrinhoProdutos .alert h4 {
+            color: #ffffff;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        #carrinhoProdutos .alert .btn-primary {
+            background: linear-gradient(110deg, #914dff, #7132d4);
+            border: none;
+            border-radius: 11px;
+            padding: 12px 24px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* RODAPÉ */
+
+        .carrinho-footer {
+            background: #100621;
+            border-top: 1px solid rgba(177, 139, 255, 0.18);
+            color: #c8b8e9;
+            text-align: center;
+            padding: 38px 0;
+        }
+
+        .carrinho-footer h4 {
+            color: #a879ff;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .carrinho-footer p {
+            color: #b9a9d7;
+            margin-bottom: 8px;
+        }
+
+        .carrinho-footer small {
+            color: #85739f;
+        }
+
+        /* RESPONSIVIDADE */
+
+        @media (max-width: 768px) {
+            .carrinho-main {
+                padding-top: 45px;
+            }
+
+            .carrinho-titulo {
+                font-size: 32px;
+            }
+
+            #carrinhoProdutos .card-body {
+                padding: 20px;
+            }
+
+            #resumoCarrinho .card-body {
+                padding: 22px;
+            }
+
+            #resumoCarrinho .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .navbar-nexora .nav-link {
+                margin-left: 5px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .navbar-nexora .navbar-brand {
+                font-size: 23px;
+            }
+
+            .navbar-nexora .nav-link {
+                margin-left: 2px;
+                font-size: 13px;
+            }
+
+            .carrinho-subtitulo {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <nav class="navbar navbar-expand-lg navbar-nexora">
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+                NEXORA
+            </a>
+
+            <div class="d-flex gap-3">
+                <a class="nav-link" href="index.html">
+                    Início
+                </a>
+
+                <a class="nav-link" href="catalogo.html">
+                    Loja
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- CARRINHO -->
+    <main class="container carrinho-main">
+
+        <span class="carrinho-etiqueta">
+            <i class="bi bi-bag"></i>
+            NEXORA STORE
+        </span>
+
+        <h1 class="carrinho-titulo">
+            Meu carrinho
+        </h1>
+
+        <p class="carrinho-subtitulo">
+            Seus produtos favoritos estão aqui. Confira os detalhes antes de finalizar sua compra.
+        </p>
+
+        <!-- PRODUTOS ADICIONADOS PELO JAVASCRIPT -->
+        <div id="carrinhoProdutos"></div>
+
+        <!-- RESUMO DA COMPRA -->
+        <div id="resumoCarrinho" class="card mt-4 d-none">
+
+            <div class="card-body">
+
+                <h4>
+                    <i class="bi bi-receipt me-2"></i>
+                    Resumo da compra
+                </h4>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Subtotal:</span>
+
+                    <strong id="subtotalCarrinho">
+                        R$ 0,00
+                    </strong>
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <strong class="fs-5 text-white">
+                        Total
+                    </strong>
+
+                    <span id="totalCarrinho" class="fs-3">
+                        R$ 0,00
+                    </span>
+
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+
+                    <a href="checkout.html" class="btn btn-primary btn-lg">
+                        Finalizar compra
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+
+                    <a href="catalogo.html" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-cart-plus me-2"></i>
+                        Continuar comprando
+                    </a>
+
+                </div>
+
+                <p class="text-muted small mt-4 mb-0">
+                    <i class="bi bi-shield-check me-1"></i>
+                    Confira seus produtos antes de confirmar o pedido.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="carrinho-footer">
+        <div class="container">
+
+            <h4>NEXORA</h4>
+
+            <p>Tecnologia que acompanha você.</p>
+
+            <small></small>
+
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

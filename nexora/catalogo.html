@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catálogo | NEXORA</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #080016;
+            color: #ffffff;
+        }
+
+        /* MENU */
+
+        .navbar-nexora {
+            background: #09001b;
+            padding: 16px 0;
+            border-bottom: 1px solid #6410e8;
+            box-shadow: 0 3px 25px rgba(112, 0, 255, 0.18);
+        }
+
+        .navbar-nexora .navbar-brand {
+            color: #a45aff;
+            font-size: 27px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .navbar-nexora .nav-link {
+            position: relative;
+            color: #e4d8ff;
+            font-weight: 600;
+            margin-left: 15px;
+            padding: 10px 8px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nexora .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 8px;
+            bottom: 3px;
+            width: 0;
+            height: 3px;
+            border-radius: 5px;
+            background: #a020ff;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nexora .nav-link:hover,
+        .navbar-nexora .nav-link.active {
+            color: #b86aff;
+        }
+
+        .navbar-nexora .nav-link:hover::after,
+        .navbar-nexora .nav-link.active::after {
+            width: calc(100% - 16px);
+        }
+
+        .navbar-toggler {
+            border: 1px solid #8b35ff;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(160, 32, 255, 0.25);
+        }
+
+        /* CABEÇALHO DO CATÁLOGO */
+
+        .catalogo-header {
+            position: relative;
+            overflow: hidden;
+            padding: 75px 20px;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at 50% 100%, rgba(112, 0, 255, 0.3), transparent 60%),
+                linear-gradient(135deg, #10002b, #080016 55%, #19003e);
+            border-bottom: 1px solid rgba(160, 32, 255, 0.35);
+        }
+
+        .catalogo-header::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            top: -230px;
+            left: 10%;
+            border: 1px solid rgba(160, 32, 255, 0.35);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(112, 0, 255, 0.2);
+        }
+
+        .catalogo-etiqueta {
+            display: inline-block;
+            padding: 9px 20px;
+            background: rgba(117, 70, 207, 0.2);
+            color: #c69aff;
+            border: 1px solid rgba(160, 32, 255, 0.55);
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .catalogo-header h1 {
+            color: #ffffff;
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .catalogo-header h1 span {
+            color: #a020ff;
+        }
+
+        .catalogo-header p {
+            color: #c5b7e2;
+            font-size: 17px;
+            margin: 0;
+        }
+
+        .catalogo-conteudo {
+            padding-top: 45px;
+            padding-bottom: 75px;
+        }
+
+        /* PESQUISA */
+
+        .catalogo-search {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 600px;
+            background: #120026;
+            padding: 16px 20px;
+            border: 1px solid #5420a0;
+            border-radius: 15px;
+            margin-bottom: 38px;
+            box-shadow: 0 5px 25px rgba(80, 0, 180, 0.12);
+            transition: 0.3s;
+        }
+
+        .catalogo-search:focus-within {
+            border-color: #a020ff;
+            box-shadow: 0 0 0 4px rgba(160, 32, 255, 0.15);
+        }
+
+        .catalogo-search span {
+            font-size: 24px;
+            color: #b86aff;
+        }
+
+        .catalogo-search input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            color: white;
+            background: transparent;
+        }
+
+        .catalogo-search input::placeholder {
+            color: #a99abb;
+        }
+
+        /* ESTRUTURA */
+
+        .catalogo-layout {
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: 35px;
+        }
+
+        .catalogo-sidebar {
+            background: linear-gradient(145deg, #16002f, #0e001f);
+            padding: 25px;
+            border: 1px solid rgba(139, 53, 255, 0.4);
+            border-radius: 20px;
+            height: fit-content;
+            box-shadow: 0 8px 30px rgba(80, 0, 180, 0.12);
+        }
+
+        .catalogo-sidebar h3 {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        /* FILTROS */
+
+        .filtro-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 13px 15px;
+            border-radius: 10px;
+            color: #b9a9d2;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filtro-btn:hover {
+            background: rgba(117, 70, 207, 0.16);
+            color: #c69aff;
+            transform: translateX(4px);
+        }
+
+        .filtro-btn.ativo {
+            background: linear-gradient(135deg, #7546cf, #5310bd);
+            border-color: #a020ff;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 5px 18px rgba(112, 0, 255, 0.2);
+        }
+
+        .catalogo-sidebar-info {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #5010a5, #8b25ed);
+            border: 1px solid rgba(210, 170, 255, 0.25);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .catalogo-sidebar-info h4 {
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        .catalogo-sidebar-info p {
+            font-size: 13px;
+            color: #eee1ff;
+            margin: 0;
+        }
+
+        /* PRODUTOS */
+
+        .catalogo-produtos-topo {
+            margin-bottom: 25px;
+        }
+
+        .catalogo-produtos-topo h2 {
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .catalogo-produtos-topo p {
+            color: #b8a9d0;
+        }
+
+        .catalogo-card {
+            height: 100%;
+            background: linear-gradient(145deg, #190032, #0d001e);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(139, 53, 255, 0.35);
+            box-shadow: 0 8px 25px rgba(70, 0, 160, 0.15);
+            transition: 0.3s;
+        }
+
+        .catalogo-card:hover {
+            transform: translateY(-7px);
+            border-color: #a020ff;
+            box-shadow: 0 12px 35px rgba(130, 0, 255, 0.25);
+        }
+
+        .catalogo-card-imagem {
+            position: relative;
+            height: 230px;
+            background: linear-gradient(135deg, #25004a, #100020);
+            overflow: hidden;
+        }
+
+        .catalogo-card-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .catalogo-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .produto-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+            background: linear-gradient(135deg, #a020ff, #6410e8);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 7px 12px;
+            border-radius: 20px;
+            box-shadow: 0 3px 15px rgba(130, 0, 255, 0.3);
+        }
+
+        .catalogo-card-info {
+            padding: 22px;
+        }
+
+        .produto-categoria {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+            color: #b783ff;
+        }
+
+        .catalogo-card-info h3 {
+            color: #ffffff;
+            font-size: 19px;
+            font-weight: 800;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+
+        .catalogo-card-info p {
+            color: #b9adcc;
+            font-size: 14px;
+            min-height: 40px;
+        }
+
+        .produto-preco {
+            margin: 15px 0 5px;
+        }
+
+        .produto-preco span {
+            color: #bd7aff;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .produto-parcela {
+            font-size: 13px;
+            color: #b9a9d2;
+            margin-bottom: 8px;
+        }
+
+        .produto-entrega {
+            font-size: 12px;
+            color: #8fe5b1;
+            background: rgba(35, 145, 88, 0.14);
+            border: 1px solid rgba(80, 210, 135, 0.2);
+            padding: 7px 10px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0 15px;
+        }
+
+        /* BOTÃO VER PRODUTO */
+
+        .btn-catalogo {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: linear-gradient(135deg, #8b35ff, #6410e8);
+            color: white;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: bold;
+            border: 1px solid rgba(190, 130, 255, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-catalogo:hover {
+            color: white;
+            background: linear-gradient(135deg, #a64aff, #7546cf);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(117, 70, 207, 0.35);
+        }
+
+        /* BOTÃO ADICIONAR AO CARRINHO */
+
+        .btn-adicionar-carrinho {
+            display: block;
+            width: 100%;
+            padding: 13px 16px;
+            margin-top: 10px;
+            border: 1px solid #8735d9;
+            border-radius: 12px;
+            background: #1c0638;
+            color: #cba7ff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-adicionar-carrinho:hover {
+            background: linear-gradient(135deg, #7546cf, #6035b5);
+            color: white;
+            border-color: #a020ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(117, 70, 207, 0.3);
+        }
+
+        .btn-adicionar-carrinho:active {
+            transform: scale(0.97);
+        }
+
+        /* MENSAGEM DE BUSCA */
+
+        #mensagemVazia {
+            margin-top: 25px;
+            padding: 25px;
+            text-align: center;
+            background: #16002f;
+            border: 1px solid #5420a0;
+            border-radius: 15px;
+            color: #d8c5f5;
+        }
+
+        /* RODAPÉ */
+
+        .catalogo-footer {
+            padding: 30px 0;
+            text-align: center;
+            background: #09001b;
+            border-top: 1px solid rgba(139, 53, 255, 0.35);
+            color: #bba7d8;
+        }
+
+        .catalogo-footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVIDADE */
+
+        @media (max-width: 991px) {
+            .catalogo-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .catalogo-sidebar-info {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .catalogo-header {
+                padding: 50px 15px;
+            }
+
+            .catalogo-header h1 {
+                font-size: 30px;
+            }
+
+            .catalogo-card-imagem {
+                height: 200px;
+            }
+
+            .catalogo-conteudo {
+                padding-top: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MENU -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-nexora">
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">NEXORA</a>
+
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#menuNexora"
+                aria-controls="menuNexora" aria-expanded="false"
+                aria-label="Abrir menu">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNexora">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="catalogo.html">Loja</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrinho.html">Carrinho</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CABEÇALHO -->
+    <section class="catalogo-header">
+        <div class="container">
+            <span class="catalogo-etiqueta">NEXORA STORE</span>
+            <h1>Explore nosso catálogo</h1>
+            <p>Tecnologia, desempenho e inovação para acompanhar você.</p>
+        </div>
+    </section>
+
+    <!-- CONTEÚDO -->
+    <main class="container catalogo-conteudo">
+
+        <!-- PESQUISA -->
+        <div class="catalogo-search">
+            <span><i class="bi bi-search"></i></span>
+            <input type="text" id="campoBusca"
+                placeholder="Buscar notebook, smartphone...">
+        </div>
+
+        <div class="catalogo-layout">
+
+            <!-- CATEGORIAS -->
+            <aside class="catalogo-sidebar">
+
+                <h3>Categorias</h3>
+
+                <button class="filtro-btn ativo" data-categoria="todos">
+                    Todos os produtos
+                </button>
+
+                <button class="filtro-btn" data-categoria="notebook">
+                    Notebooks
+                </button>
+
+                <button class="filtro-btn" data-categoria="smartphone">
+                    Smartphones
+                </button>
+
+                <div class="catalogo-sidebar-info">
+                    <span>✦</span>
+                    <h4>NEXORA</h4>
+                    <p>Encontre a tecnologia ideal para você.</p>
+                </div>
+
+            </aside>
+
+            <!-- PRODUTOS -->
+            <section>
+
+                <div class="catalogo-produtos-topo">
+                    <h2>Produtos em destaque</h2>
+                    <p>Confira nossa seleção de tecnologia.</p>
+                </div>
+
+                <div class="row g-4" id="listaProdutos">
+
+                    <!-- NOTEBOOK 1 -->
+                    <div class="col-12 col-sm-6 col-xl-4 produto"
+                        data-categoria="notebook">
+
+                        <div class="catalogo-card">
+                            <div class="catalogo-card-imagem">
+                                <span class="produto-tag">Destaque</span>
+                                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
+                                    alt="Notebook Lenovo IdeaPad Slim 3">
+                            </div>
+
+                            <div class="catalogo-card-info">
+                                <span class="produto-categoria">NOTEBOOK</span>
+                                <h3>Lenovo IdeaPad Slim 3</h3>
+                                <p>Notebook para produtividade, estudos e tarefas do dia a dia.</p>
+
+                                <div class="produto-preco">
+                                    <span>R$ 3.499,00</span>
+                                </div>
+
+                                <div class="produto-parcela">
+                                    ou 12x de R$ 291,58 sem juros
+                                </div>
+
+                                <div class="produto-entrega">
+                                    ✓ Entrega disponível
+                                </div>
+
+                                <a href="produto.html?id=notebook-pro"
+                                    class="btn-catalogo">Ver produto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NOTEBOOK 2 -->
+                    <div class="col-12 col-sm-6 col-xl-4 produto"
+                        data-categoria="notebook">
+
+                        <div class="catalogo-card">
+                            <div class="catalogo-card-imagem">
+                                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
+                                    alt="Notebook Acer Aspire 5">
+                            </div>
+
+                            <div class="catalogo-card-info">
+                                <span class="produto-categoria">NOTEBOOK</span>
+                                <h3>Acer Aspire 5</h3>
+                                <p>Notebook versátil para estudos, trabalho e entretenimento.</p>
+
+                                <div class="produto-preco">
+                                    <span>R$ 4.299,00</span>
+                                </div>
+
+                                <div class="produto-parcela">
+                                    ou 12x de R$ 358,25 sem juros
+                                </div>
+
+                                <div class="produto-entrega">
+                                    ✓ Entrega disponível
+                                </div>
+
+                                <a href="produto.html?id=notebook-ultra"
+                                    class="btn-catalogo">Ver produto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SMARTPHONE 1 -->
+                    <div class="col-12 col-sm-6 col-xl-4 produto"
+                        data-categoria="smartphone">
+
+                        <div class="catalogo-card">
+                            <div class="catalogo-card-imagem">
+                                <span class="produto-tag">Popular</span>
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+                                    alt="Apple iPhone 13">
+                            </div>
+
+                            <div class="catalogo-card-info">
+                                <span class="produto-categoria">SMARTPHONE</span>
+                                <h3>Apple iPhone 13</h3>
+                                <p>Smartphone Apple com design moderno, ótimo desempenho e câmeras de qualidade.</p>
+
+                                <div class="produto-preco">
+                                    <span>R$ 1.899,00</span>
+                                </div>
+
+                                <div class="produto-parcela">
+                                    ou 12x de R$ 158,25 sem juros
+                                </div>
+
+                                <div class="produto-entrega">
+                                    ✓ Entrega disponível
+                                </div>
+
+                                <a href="produto.html?id=smartphone-x"
+                                    class="btn-catalogo">Ver produto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SMARTPHONE 2 -->
+                    <div class="col-12 col-sm-6 col-xl-4 produto"
+                        data-categoria="smartphone">
+
+                        <div class="catalogo-card">
+                            <div class="catalogo-card-imagem">
+                                <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd"
+                                    alt="Apple iPhone 14">
+                            </div>
+
+                            <div class="catalogo-card-info">
+                                <span class="produto-categoria">SMARTPHONE</span>
+                                <h3>Apple iPhone 14</h3>
+                                <p>Smartphone Apple com recursos modernos, câmeras avançadas e ótimo desempenho.</p>
+
+                                <div class="produto-preco">
+                                    <span>R$ 2.499,00</span>
+                                </div>
+
+                                <div class="produto-parcela">
+                                    ou 12x de R$ 208,25 sem juros
+                                </div>
+
+                                <div class="produto-entrega">
+                                    ✓ Entrega disponível
+                                </div>
+
+                                <a href="produto.html?id=smartphone-plus"
+                                    class="btn-catalogo">Ver produto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="mensagemVazia" class="d-none">
+                    Nenhum produto encontrado.
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="catalogo-footer">
+        <div class="container">
+            <p>Tecnologia que acompanha você.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- PESQUISA E FILTROS -->
+    <script>
+        const campoBuscaCatalogo = document.getElementById("campoBusca");
+        const botoesFiltroCatalogo = document.querySelectorAll(".filtro-btn");
+        const produtosCatalogo = document.querySelectorAll(".produto");
+        const mensagemVaziaCatalogo = document.getElementById("mensagemVazia");
+
+        let categoriaCatalogo = "todos";
+
+        function atualizarCatalogo() {
+            const busca = campoBuscaCatalogo.value.toLowerCase().trim();
+            let quantidadeEncontrada = 0;
+
+            produtosCatalogo.forEach(function (produto) {
+                const categoria = produto.dataset.categoria;
+                const texto = produto.textContent.toLowerCase();
+
+                const categoriaCorreta =
+                    categoriaCatalogo === "todos" ||
+                    categoria === categoriaCatalogo;
+
+                const buscaCorreta = texto.includes(busca);
+
+                if (categoriaCorreta && buscaCorreta) {
+                    produto.style.display = "";
+                    quantidadeEncontrada++;
+                } else {
+                    produto.style.display = "none";
+                }
+            });
+
+            mensagemVaziaCatalogo.classList.toggle(
+                "d-none",
+                quantidadeEncontrada > 0
+            );
+        }
+
+        campoBuscaCatalogo.addEventListener("input", atualizarCatalogo);
+
+        botoesFiltroCatalogo.forEach(function (botao) {
+            botao.addEventListener("click", function () {
+                categoriaCatalogo = botao.dataset.categoria;
+
+                botoesFiltroCatalogo.forEach(function (outroBotao) {
+                    outroBotao.classList.remove("ativo");
+                });
+
+                botao.classList.add("ativo");
+                atualizarCatalogo();
+            });
+        });
+    </script>
+
+</body>
+</html>

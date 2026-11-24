@@ -1,0 +1,566 @@
+
+/* =========================================
+   NEXORA - ESTILO GERAL
+========================================= */
+
+:root {
+    --roxo: #7546cf;
+    --roxo-escuro: #6035b5;
+    --roxo-claro: #eee7ff;
+    --lilas: #f7f5ff;
+    --texto: #292044;
+    --texto-secundario: #89839d;
+    --borda: #e8e0f7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--lilas);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* =========================================
+   MENU PRINCIPAL
+========================================= */
+
+.navbar-nexora {
+    background: white;
+    border-bottom: 1px solid var(--borda);
+    box-shadow: 0 3px 15px rgba(70, 40, 120, 0.05);
+    padding: 15px 0;
+    position: relative;
+    z-index: 100;
+}
+
+.navbar-nexora .container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-nexora,
+.navbar-nexora .navbar-brand {
+    color: var(--roxo);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo-nexora:hover,
+.navbar-nexora .navbar-brand:hover {
+    color: var(--roxo-escuro);
+}
+
+.logo-simbolo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.navbar-nexora .nav-link {
+    color: #5c5475;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.navbar-nexora .nav-link:hover,
+.navbar-nexora .nav-link.active {
+    color: var(--roxo);
+}
+
+.menu-principal {
+    gap: 8px;
+}
+
+.menu-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.pesquisa-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #f8f5ff;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    color: #74658f;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.pesquisa-menu:hover {
+    background: var(--roxo-claro);
+    border-color: #cbb8f5;
+    color: var(--roxo);
+}
+
+.lupa {
+    color: var(--roxo);
+    font-size: 20px;
+}
+
+.icone-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: #f8f5ff;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    color: var(--roxo);
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.icone-menu:hover {
+    background: var(--roxo-claro);
+    transform: translateY(-2px);
+}
+
+.navbar-toggler {
+    border-color: var(--borda);
+}
+
+.navbar-toggler-icon {
+    filter: none;
+}
+
+/* =========================================
+   BANNER PRINCIPAL
+========================================= */
+
+.banner-arte {
+    width: 100%;
+    overflow: hidden;
+    background: #171044;
+}
+
+.banner-arte a {
+    display: block;
+    width: 100%;
+}
+
+.banner-imagem-completa {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* =========================================
+   BENEFÍCIOS
+========================================= */
+
+.beneficios {
+    padding-top: 35px;
+    padding-bottom: 20px;
+}
+
+.beneficio-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+    padding: 22px;
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+    transition: 0.3s;
+}
+
+.beneficio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(90, 60, 150, 0.08);
+}
+
+.beneficio-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 48px;
+    background: var(--roxo-claro);
+    border-radius: 13px;
+    font-size: 23px;
+}
+
+.beneficio-card h5 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--texto);
+}
+
+.beneficio-card p {
+    color: var(--texto-secundario);
+    margin: 0;
+    font-size: 14px;
+}
+
+/* =========================================
+   SEÇÕES
+========================================= */
+
+.secao {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.etiqueta {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-bottom: 14px;
+    background: var(--roxo-claro);
+    color: var(--roxo);
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.titulo-secao {
+    color: var(--texto);
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.texto-secundario {
+    color: var(--texto-secundario);
+    font-size: 16px;
+}
+
+/* =========================================
+   CATEGORIAS
+========================================= */
+
+.categoria-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 230px;
+    height: 100%;
+    padding: 35px;
+    border: 1px solid var(--borda);
+    border-radius: 22px;
+    background: white;
+    box-shadow: 0 8px 25px rgba(90, 60, 150, 0.06);
+    transition: 0.3s;
+}
+
+.categoria-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(90, 60, 150, 0.12);
+}
+
+.categoria-card h3 {
+    font-size: 27px;
+    font-weight: 800;
+    color: var(--texto);
+    margin-bottom: 12px;
+}
+
+.categoria-card p {
+    color: var(--texto-secundario);
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.categoria-roxa {
+    background: linear-gradient(135deg, #7546cf, #9c7ae8);
+    border: none;
+}
+
+.categoria-roxa h3,
+.categoria-roxa p {
+    color: white;
+}
+
+.categoria-roxa .btn-outline-nexora {
+    color: white;
+    border-color: white;
+}
+
+.categoria-roxa .btn-outline-nexora:hover {
+    background: white;
+    color: var(--roxo);
+}
+
+/* =========================================
+   BOTÕES NEXORA
+========================================= */
+
+.btn-nexora {
+    display: inline-block;
+    background: linear-gradient(135deg, #7546cf, #9873e6);
+    color: white;
+    border: none;
+    border-radius: 11px;
+    padding: 12px 22px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-nexora:hover {
+    background: var(--roxo-escuro);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(117, 70, 207, 0.25);
+}
+
+.btn-outline-nexora {
+    display: inline-block;
+    background: transparent;
+    color: var(--roxo);
+    border: 1px solid var(--roxo);
+    border-radius: 11px;
+    padding: 11px 20px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-outline-nexora:hover {
+    background: var(--roxo);
+    color: white;
+}
+
+/* =========================================
+   BOTÃO ADICIONAR AO CARRINHO
+========================================= */
+
+.btn-adicionar-carrinho {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #eee7ff, #e2d5ff);
+    color: #7044c8;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-adicionar-carrinho:hover {
+    background: linear-gradient(135deg, #7546cf, #6035b5);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(117, 70, 207, 0.22);
+}
+
+.btn-adicionar-carrinho:active {
+    transform: scale(0.98);
+}
+
+/* =========================================
+   PRODUTOS EM DESTAQUE
+========================================= */
+
+.produto-card {
+    overflow: hidden;
+    height: 100%;
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(90, 60, 150, 0.06);
+    transition: 0.3s;
+}
+
+.produto-card:hover {
+    transform: translateY(-7px);
+    border-color: #cbb8f5;
+    box-shadow: 0 18px 40px rgba(90, 60, 150, 0.14);
+}
+
+.produto-card .card-img-top {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    background: #f2edff;
+}
+
+.produto-card .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+}
+
+.produto-categoria {
+    display: inline-block;
+    align-self: flex-start;
+    color: var(--roxo);
+    background: var(--roxo-claro);
+    border-radius: 30px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.produto-card .card-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--texto);
+}
+
+.produto-card .card-text {
+    color: var(--texto-secundario);
+    line-height: 1.6;
+}
+
+.preco {
+    color: var(--roxo);
+    font-size: 23px;
+    font-weight: 800;
+    margin: 15px 0;
+}
+
+/* =========================================
+   CATÁLOGO
+========================================= */
+
+.catalogo-card {
+    border: 1px solid var(--borda);
+    box-shadow: 0 8px 25px rgba(90, 60, 150, 0.08);
+    transition: 0.3s;
+}
+
+.catalogo-card:hover {
+    border-color: #cbb8f5;
+    box-shadow: 0 18px 40px rgba(90, 60, 150, 0.16);
+}
+
+.catalogo-card-imagem {
+    background: linear-gradient(135deg, #f4f0ff, #e9e2fa);
+}
+
+.catalogo-card-imagem img {
+    object-fit: cover;
+}
+
+.btn-catalogo {
+    box-shadow: 0 5px 15px rgba(117, 70, 207, 0.2);
+}
+
+.btn-catalogo:hover {
+    box-shadow: 0 8px 20px rgba(117, 70, 207, 0.3);
+}
+
+.catalogo-search:focus-within {
+    border-color: #a889e9;
+    box-shadow: 0 0 0 4px rgba(137, 100, 220, 0.12);
+}
+
+.filtro-btn {
+    transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+
+.filtro-btn:hover {
+    transform: translateX(4px);
+}
+
+.filtro-btn.ativo {
+    background: linear-gradient(135deg, #eee7ff, #e4d9ff);
+    color: #7044c8;
+}
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.rodape {
+    background: #211936;
+    color: white;
+    padding: 40px 0;
+    margin-top: 30px;
+}
+
+.rodape h4 {
+    color: white;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.rodape p {
+    color: #c8bde5;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 991px) {
+    .menu-principal {
+        margin-top: 15px;
+        align-items: flex-start;
+    }
+
+    .menu-acoes {
+        margin-top: 15px;
+        margin-bottom: 10px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .secao {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .titulo-secao {
+        font-size: 29px;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-nexora {
+        font-size: 21px;
+    }
+
+    .beneficio-card {
+        padding: 18px;
+    }
+
+    .categoria-card {
+        padding: 25px;
+        min-height: auto;
+    }
+
+    .produto-card .card-img-top {
+        height: 200px;
+    }
+
+    .titulo-secao {
+        font-size: 25px;
+    }
+
+    .secao {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
